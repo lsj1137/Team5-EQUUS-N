@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Getter
 @Setter
 @Component
-@Profile({"dev", "prod"})
+@Profile({"dev", "prod", "docker"})
 @ConfigurationProperties("google")
 public class GoogleAuthProperties {
 

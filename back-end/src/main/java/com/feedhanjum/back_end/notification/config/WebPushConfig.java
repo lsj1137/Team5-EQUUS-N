@@ -11,7 +11,7 @@ import java.security.GeneralSecurityException;
 import java.security.Security;
 
 @Slf4j
-@Profile({"dev", "prod"})
+@Profile({"dev", "prod", "docker"})
 @Configuration
 public class WebPushConfig {
 

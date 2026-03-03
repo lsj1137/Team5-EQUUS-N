@@ -17,7 +17,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 @Slf4j
 @RequiredArgsConstructor
-@Profile({"dev", "prod"})
+@Profile({"dev", "prod", "docker"})
 @Service
 public class GoogleAuthService {
     private final GoogleAuthProperties googleAuthProperties;
