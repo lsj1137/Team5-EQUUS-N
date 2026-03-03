@@ -1,6 +1,6 @@
 import { showToast } from '../utility/handleToast';
 
-const BASE_URL = 'https://api.feedhanjum.com';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL ?? '';
 
 /**
  * @typedef {Object} RequestOptions

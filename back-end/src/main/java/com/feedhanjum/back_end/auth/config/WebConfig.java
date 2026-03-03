@@ -31,6 +31,9 @@ public class WebConfig implements WebMvcConfigurer {
     @Value("${server.port}")
     private int httpsPort;
 
+    @Value("${app.security.force-https:true}")
+    private boolean forceHttps;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(authInterceptor())
@@ -75,6 +78,9 @@ public class WebConfig implements WebMvcConfigurer {
         TomcatServletWebServerFactory tomcatServletWebServerFactory = new TomcatServletWebServerFactory() {
             @Override
             protected void postProcessContext(Context context) {
+                if (!forceHttps) {
+                    return;
+                }
                 SecurityConstraint securityConstraint = new SecurityConstraint();
                 securityConstraint.setUserConstraint("CONFIDENTIAL");
                 SecurityCollection collection = new SecurityCollection();
@@ -83,7 +89,9 @@ public class WebConfig implements WebMvcConfigurer {
                 context.addConstraint(securityConstraint);
             }
         };
-        tomcatServletWebServerFactory.addAdditionalTomcatConnectors(redirectConnector());
+        if (forceHttps) {
+            tomcatServletWebServerFactory.addAdditionalTomcatConnectors(redirectConnector());
+        }
         return tomcatServletWebServerFactory;
     }
 

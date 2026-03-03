@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  http:
+    port: 8081
+
+app:
+  security:
+    force-https: false
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+  data:
+    redis:
+      host: redis
+      port: 6379
+  ai:
+    openai:
+      api-key: ${OPENAI_API_KEY:}
+      chat:
+        options:
+          model: gpt-4o-mini
+  mail:
+    host: ${MAIL_HOST:}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+
+cors:
+  allowed-origins:
+    - "http://localhost"
+    - "http://127.0.0.1"
+    - "http://localhost:80"
+    - "http://127.0.0.1:80"
+
+google:
+  client-id: ${GOOGLE_CLIENT_ID:}
+  client-secret: ${GOOGLE_CLIENT_SECRET:}
+  redirect-uri: ${GOOGLE_REDIRECT_URI:/oauth/google}
+
+webpush:
+  subject: ${WEBPUSH_SUBJECT:mailto:admin@example.com}
+  vapid:
+    public-key: ${WEBPUSH_VAPID_PUBLIC_KEY:}
+    private-key: ${WEBPUSH_VAPID_PRIVATE_KEY:}
